@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/petygram/static/js/main.ca4f275f.js",
+    "index.html": "/petygram/index.html",
+    "main.ca4f275f.js.map": "/petygram/static/js/main.ca4f275f.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ca4f275f.js"
+  ]
+}
