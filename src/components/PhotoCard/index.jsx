@@ -1,38 +1,63 @@
+import React from "react";
 import { ImgWrapper, Img, Article } from "./styles";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useNearScreen } from "../../hooks/useNearScreen";
-import { FavButton } from "../FavButton";
-import { useMutation } from "@apollo/client";
-import { LIKE_PHOTO } from "../../containers/ToggleLike";
 import { Link } from "react-router-dom";
+import FavButton from "../FavButton";
+import { GraphqlMutationContainer } from "../../containers/graphqlMutationContainer";
+import { gql } from "@apollo/client";
+
+const LIKE_PHOTO = gql`
+  mutation likePhoto($input: LikePhoto!) {
+    likePhoto(input: $input) {
+      id
+      liked
+      likes
+    }
+  }
+`;
+
+const FavButtonContainer = GraphqlMutationContainer(FavButton, LIKE_PHOTO);
 
 const DEFAULT_IMAGE =
-  "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
+  "https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png";
 
-export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
+function PhotoCard({ id, likes = 0, src = DEFAULT_IMAGE, liked }) {
+  // const [liked, setLiked] = useLocalStorage(`like-${id}`, false);
+
   const [show, ref] = useNearScreen();
-  const key = `like-${id}`;
-  const [liked, setLiked] = useLocalStorage(key, false);
-  const [mutateFunction, { error }] = useMutation(LIKE_PHOTO);
 
-  const handleFavClick = () => {
-    !liked && mutateFunction({ variables: { input: { id } } });
-    setLiked(!liked);
+  const handleFavClick = async (mutateAction, manager) => {
+    await mutateAction({ variables: { input: { id } } });
+    // setLiked(!liked);
   };
-  if (error) return <p>Submission error! ${error.message}</p>;
 
   return (
     <Article ref={ref}>
       {show && (
         <>
-          <Link to={`/detail/${id}`}>
+          <Link
+            to={{
+              pathname: "/search",
+              search: `?details=${id}`,
+            }}
+          >
             <ImgWrapper>
               <Img src={src} alt="" />
             </ImgWrapper>
           </Link>
-          <FavButton liked={liked} likes={likes} onClick={handleFavClick} />
+          {/* <Button onClick={() => setLiked(!liked)}>
+                        {" "}
+                        <Icon size={"32px"} /> {likes} likes!
+                    </Button> */}
+          <FavButtonContainer
+            liked={liked}
+            likes={likes}
+            onClick={handleFavClick}
+          />
         </>
       )}
     </Article>
   );
-};
+}
+
+export default PhotoCard;

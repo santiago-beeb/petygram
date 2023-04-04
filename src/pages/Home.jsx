@@ -1,14 +1,19 @@
-import { useParams } from "react-router-dom";
+import React from "react";
 import { ListOfCategories } from "../components/ListOfCategories";
 import { ListOfPhotoCard } from "../components/ListOfPhotoCard";
+import { Layout } from "../components/Layout";
 
-export const Home = () => {
-  const { id } = useParams();
-
+function HomePage(props) {
   return (
-    <>
+    <Layout>
       <ListOfCategories />
-      <ListOfPhotoCard categoryId={id} />
-    </>
+      <ListOfPhotoCard />
+    </Layout>
   );
-};
+}
+
+const Home = React.memo(HomePage, (prevProps, props) => {
+  return prevProps.id === props.id;
+});
+
+export { Home };

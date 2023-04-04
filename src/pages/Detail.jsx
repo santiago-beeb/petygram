@@ -1,8 +1,13 @@
-import { useParams } from "react-router-dom";
-import { PhotoCardWithQuery } from "../containers/PhotoCardQuery";
+import React from "react";
+import { Layout } from "../components/Layout";
+import { PhotoCardDetailed } from "../components/photoCardDetail";
 
-export const Detail = () => {
-  const params = useParams();
+function Detail(props) {
+  return (
+    <Layout title={"detalle de mascota"}>
+      <PhotoCardDetailed />
+    </Layout>
+  );
+}
 
-  return <PhotoCardWithQuery id={params.detailId} />;
-};
+export { Detail };
