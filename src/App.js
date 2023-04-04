@@ -26,7 +26,7 @@ function App(props) {
                 <Routes>
                   <Route
                     path="/"
-                    element={isAuth ? <Home /> : <Navigate to="/login" />}
+                    element={<Home />}
                   />
                   <Route
                     path="/favs"
