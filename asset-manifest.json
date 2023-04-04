@@ -1,10 +1,14 @@
 {
   "files": {
-    "main.js": "/petygram/static/js/main.ca4f275f.js",
+    "main.js": "/petygram/static/js/main.a7d74783.js",
+    "static/js/594.ee1f2abd.chunk.js": "/petygram/static/js/594.ee1f2abd.chunk.js",
+    "static/js/132.e91fa91c.chunk.js": "/petygram/static/js/132.e91fa91c.chunk.js",
     "index.html": "/petygram/index.html",
-    "main.ca4f275f.js.map": "/petygram/static/js/main.ca4f275f.js.map"
+    "main.a7d74783.js.map": "/petygram/static/js/main.a7d74783.js.map",
+    "594.ee1f2abd.chunk.js.map": "/petygram/static/js/594.ee1f2abd.chunk.js.map",
+    "132.e91fa91c.chunk.js.map": "/petygram/static/js/132.e91fa91c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.ca4f275f.js"
+    "static/js/main.a7d74783.js"
   ]
 }
